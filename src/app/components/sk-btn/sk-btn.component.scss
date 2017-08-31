@@ -1,0 +1,21 @@
+@import "../../theme/variables";
+
+.sk-btn{
+  background-color: #444;
+  border-radius: 4px;
+  color: #fff;
+  padding: 0.6em 1.4em;
+  border: none;
+  font-size: inherit;
+  cursor: pointer;
+  outline-color: transparent;
+  display: inline-block;
+  text-align: center;
+}
+.sk-btn.sk-hvr{
+  background-color: $deepBlack;
+}
+.sk-btn[disabled]{
+  background-color: $disabledColor !important;
+  color: $disabledFontColor !important;
+}

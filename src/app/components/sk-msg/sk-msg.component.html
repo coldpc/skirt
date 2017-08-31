@@ -1,0 +1,12 @@
+<div class="sk-msg-container">
+  <div *ngIf="msgInfo.title" class="msg-title-con">{{msgInfo.title}}</div>
+  <div *ngIf="msgInfo.content" class="msg-content">{{msgInfo.content}}</div>
+  <div class="msg-btn-part">
+    <div class="sk-msg-bnt-con">
+      <app-sk-btn width="90px" label="cancel"></app-sk-btn>
+    </div>
+    <div class="sk-msg-bnt-con">
+      <app-sk-btn width="90px" label="ok"></app-sk-btn>
+    </div>
+  </div>
+</div>

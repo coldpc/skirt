@@ -1,0 +1,65 @@
+1、下载最新node -v v8.3.0
+  //npm版本 npm -v 5.3.0
+
+//安装cnpm
+2、npm install -g cnpm --registry=https://registry.npm.taobao.org
+
+
+3、npm install -g angular-cli@latest
+
+如果你之前安装失败过，最好在安装angular-cli之前先卸载干净，用以下两句：
+npm uninstall -g angular-cli
+npm cache clean
+
+//设置angular ng的安装代理cnpm
+4、ng set --global packageManager=cnpm
+
+//进入目录
+5、ng new project-name
+
+
+//翻译安装
+6、npm install ng2-translate --save
+
+//安装手势识别 寻求帮助访问：https://scotch.io/tutorials/using-hammerjs-touch-gesture-in-angular-2
+7、npm install hammerjs --save
+
+/*********发布代码**************/
+ng build --prod --aot
+
+/**********ng server***********/
+ng server --host 192.168.0.249 --port 4200 --open
+
+
+/***************安装gzip******************/
+npm i compression@1.6.1 --save
+cnpm install --save-dev gulp-uglify
+cnpm install --save-dev gulp-gzip
+cnpm install --save-dev gulp
+
+
+/*************快速命令ng*************/
+ng generate component sk-btn
+ng generate directive my-directive - 生成一个新指令
+ng generate pipe my-pipe - 生成一个新管道
+ng generate service my-service - 生成一个新服务
+ng generate route my-route - 生成一个新路由
+ng generate class my-class - 生成一个简易的模型类
+
+
+/************************翻译方案************************/
+ng xi18n --locale en_US --output-path ./src/i18n  --out-file messages-en_us.xlf
+ng xi18n --locale zh_CN --output-path ./src/i18n  --out-file messages-zh_cn.xlf
+
+
+--i18nFile: 翻译文件的路径
+--i18nFile: the path to the translation file.
+--locale: 语言环境的名字
+--i18nFormat: 翻译文件的格式
+
+---使用AoT编译器时的国际化
+ng build --prod --aot --i18nFile ./src/i18n/messages-en_us.xlf --locale en_US --i18nFormat xlf --output-path en-dist
+
+---Bootstrap with translation providers
+
+

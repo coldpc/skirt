@@ -1,1 +1,36 @@
-/* You can add global styles to this file, and also import other style files */
+@import "./app/theme/variables";
+body {
+  font-family: 'Helvetica Neue',Helvetica,sans-serif;
+  font-size: $rootFontSize !important;
+  background-color: $bodyBack;
+  -webkit-overflow-scrolling: touch
+}
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+  outline: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+.transition {
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+//清楚margin padding
+p, ul, h1, h2, h3, h4, body, html{
+  margin: 0;
+  padding: 0;
+}
+
+//h的字体大小
+h1{
+  font-size: $biggerFontSize;
+}
+h2{
+  font-size: $bigFontSize;
+}
+h3{
+  font-size: $normalFontSize;
+}
