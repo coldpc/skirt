@@ -1,1 +1,9 @@
-<button [disabled]="!!disabled" [class]="'transition sk-btn ' + className" (touchend)="endHover()" (touchcancel)="endHover()" (touchmove)="endHover()" (touchstart)="touchStart()" [style.width]="width ? width : 'auto'">sss{{label}}</button>
+<button [disabled]="!!disabled"
+        (tap)="onTap($event)"
+        class="transition sk-btn"
+        [ngClass]="className"
+        (touchend)="endHover()"
+        (touchcancel)="endHover()"
+        (touchmove)="endHover()"
+        (touchstart)="touchStart()"
+        [style.width]="width ? width : 'auto'">sss{{label}}</button>

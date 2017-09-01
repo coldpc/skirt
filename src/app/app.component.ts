@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {TranslateService} from 'ng2-translate';
-import { NgForm } from '@angular/forms';
 import { SkMsgInterface } from './components/sk-msg/SkMsgInterface';
 import { VerifyDynamicPwd } from "./yaok/DataService/login/VerifyDynamicPwd";
+import { Upload } from "./yaok/dataService/attachment/Upload";
 
 interface Hero {
   name: string;
@@ -12,7 +12,7 @@ interface Hero {
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: [],
-  providers: [VerifyDynamicPwd]
+  providers: [VerifyDynamicPwd, Upload]
 })
 
 export class AppComponent {
@@ -28,56 +28,54 @@ export class AppComponent {
     content: 'sadfffffffffffffffff'
   };
 
-  constructor(private translate: TranslateService, private baseService: VerifyDynamicPwd) {
+  constructor(private translate: TranslateService, private baseService: VerifyDynamicPwd, private uploadService: Upload) {
     // 设置默认的语言包
     // this.translate.setDefaultLang('zh_CN');
     // 切换语言包
     this.translate.use('zh_CN');
 
 
-    var service = this.baseService;
-    this.baseService.data = {
+    const service = this.baseService;
+    service.data = {
       dynamicPassword: "asdffffff",
       internationalCode: "+86",
       mobile: "167899",
       token: "132143141"
     };
 
-    this.baseService.execute(res => {
+    service.execute(res => {
       console.log(res);
     }, msg => {
       console.log(this.baseService, msg);
     });
-
-    // 显示消息
-    // this.translate.get('HELLO', {value: 'world'}).subscribe((res: string) => {
-    //   console.log(res);
-    //   this.hello = res;
-    // });
-
-    // this.httpService.request({
-    //   url: 'http://apptestv2.yaok.com/appapi/remoteConfig/getConfigs',
-    //   params: {v: 1},
-    //   data: {a: 1, b: 'ccccccc'},
-    //   method: 'post'
-    // }, data => {
-    //   console.log(this.translate);
-    //   console.log(data);
-    // }, msg => {
-    //   alert(msg);
-    // });
   }
 
-  onSubmit(f: NgForm) {
-    console.log(f.value);  // { first: '', last: '' }
-    console.log(f.valid);  // false
+  onSubmit(e) {
+    // let files = e.target.files, file, addResult = files;
+    // for (var i = 0, l = files.length; i < l; i++) {
+    //   file = files[i];
+    //   addResult = file; // window.URL.createObjectURL(file));
+    //   if (addResult === false){
+    //     break;
+    //   }
+    // }
+    // input.value = null;
+    debugger;
+
+    this.uploadService.data = {
+      attachType: "IMG",
+      source: "USER",
+      file: e.target.files[0]
+    };
+    console.log(e);  // { first: '', last: '' }
+    this.uploadService.execute(res => {
+      console.log(res);
+    }, msg => {
+      console.log(msg);
+    });
   }
 
-  onSwiperLeft(e: any) {
+  onSwipe(e: any) {
     console.log(e);
-  }
-
-  onTap(e: any) {
-    console.log('tap', e);
   }
 }

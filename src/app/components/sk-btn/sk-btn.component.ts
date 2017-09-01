@@ -1,14 +1,16 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 @Component({
   selector: 'app-sk-btn',
   templateUrl: './sk-btn.component.html',
-  styleUrls: ['./sk-btn.component.scss']
+  styleUrls: ['./sk-btn.component.scss'],
+  providers: []
 })
 
 export class SkBtnComponent implements OnInit {
   @Input() label: string;
   @Input() width: string;
   @Input() disabled: Boolean;
+  @Output() tap: EventEmitter<Object> = new EventEmitter();
 
   className = '';
 
@@ -25,4 +27,7 @@ export class SkBtnComponent implements OnInit {
     this.className = "";
   }
 
+  onTap(e) {
+    this.tap.emit(e);
+  }
 }

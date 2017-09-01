@@ -4,5 +4,6 @@
 <!--<app-sk-btn [disabled]="true" label="我的扥"></app-sk-btn>-->
 <!--<app-sk-msg [msgInfo]="msgInfo" ></app-sk-msg>-->
 <p>test</p>
-<h1 i18n="@@introductionHeader" i18n-title="@@title" title="Angular logo">Hello i18n</h1>
-<app-sk-btn label="提交" ></app-sk-btn>
+<h1 (tap)="onSwipe($event)">Hello i18n</h1>
+<app-sk-btn label="提交" (tap)="onSubmit($e)"></app-sk-btn>
+<input type="file" (change)="onSubmit($event)">
