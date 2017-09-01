@@ -19,7 +19,7 @@ npm cache clean
 
 
 //翻译安装
-6、npm install ng2-translate --save
+6、npm install ng2-translate --save-dev
 
 //安装手势识别 寻求帮助访问：https://scotch.io/tutorials/using-hammerjs-touch-gesture-in-angular-2
 7、npm install hammerjs --save
@@ -61,5 +61,16 @@ ng xi18n --locale zh_CN --output-path ./src/i18n  --out-file messages-zh_cn.xlf
 ng build --prod --aot --i18nFile ./src/i18n/messages-en_us.xlf --locale en_US --i18nFormat xlf --output-path en-dist
 
 ---Bootstrap with translation providers
+
+
+
+
+
+
+
+
+
+/*************************************************经过package的配置***************************************/
+cnpm install
 
 
