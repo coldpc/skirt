@@ -22,7 +22,7 @@ npm cache clean
 6、npm install ng2-translate --save-dev
 
 //安装手势识别 寻求帮助访问：https://scotch.io/tutorials/using-hammerjs-touch-gesture-in-angular-2
-7、npm install hammerjs --save
+7、npm install hammerjs --save-dev
 
 /*********发布代码**************/
 ng build --prod --aot
