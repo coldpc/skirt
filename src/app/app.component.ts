@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {TranslateService} from 'ng2-translate';
-import { BaseService } from './services/BaseService';
 import { NgForm } from '@angular/forms';
 import { SkMsgInterface } from './components/sk-msg/SkMsgInterface';
+import { VerifyDynamicPwd } from "./yaok/DataService/login/VerifyDynamicPwd";
 
 interface Hero {
   name: string;
@@ -12,7 +12,7 @@ interface Hero {
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: [],
-  providers: [BaseService]
+  providers: [VerifyDynamicPwd]
 })
 
 export class AppComponent {
@@ -28,11 +28,26 @@ export class AppComponent {
     content: 'sadfffffffffffffffff'
   };
 
-  constructor(private translate: TranslateService, private baseService: BaseService) {
+  constructor(private translate: TranslateService, private baseService: VerifyDynamicPwd) {
     // 设置默认的语言包
     // this.translate.setDefaultLang('zh_CN');
     // 切换语言包
     this.translate.use('zh_CN');
+
+
+    var service = this.baseService;
+    this.baseService.data = {
+      dynamicPassword: "asdffffff",
+      internationalCode: "+86",
+      mobile: "167899",
+      token: "132143141"
+    };
+
+    this.baseService.execute(res => {
+      console.log(res);
+    }, msg => {
+      console.log(this.baseService, msg);
+    });
 
     // 显示消息
     // this.translate.get('HELLO', {value: 'world'}).subscribe((res: string) => {

@@ -72,5 +72,5 @@ ng build --prod --aot --i18nFile ./src/i18n/messages-en_us.xlf --locale en_US --
 
 /*************************************************经过package的配置***************************************/
 cnpm install
-
+npm view typescript versions
 

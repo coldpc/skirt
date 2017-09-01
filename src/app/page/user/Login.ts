@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {TranslateService} from 'ng2-translate';
-import { BaseService } from '../../services/BaseService';
 import { NgForm } from '@angular/forms';
+import {BaseDataService} from "../../yaok/dataService/BaseDataService";
 
 interface Hero {
   name: string;
@@ -10,7 +10,7 @@ interface Hero {
 @Component ({
   selector: 'app-root',
   templateUrl: './Login.html',
-  providers: [BaseService]
+  providers: [BaseDataService]
 })
 
 export class LoginComponent {
@@ -21,7 +21,7 @@ export class LoginComponent {
     name: 'pcd'
   };
 
-  constructor(private translate: TranslateService, private httpService: BaseService) {
+  constructor(private translate: TranslateService, private httpService: BaseDataService) {
     // 设置默认的语言包
     this.translate.setDefaultLang('zh_CN');
     // 切换语言包

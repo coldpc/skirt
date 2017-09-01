@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {CommonVarial} from '../StaticValues';
 @Component({
   selector: 'app-sk-btn',
   templateUrl: './sk-btn.component.html',
@@ -20,10 +19,10 @@ export class SkBtnComponent implements OnInit {
   }
 
   touchStart() {
-    this.className = CommonVarial.hvrClass;
+    this.className = "sk-hvr";
   }
   endHover() {
-    this.className = '';
+    this.className = "";
   }
 
 }

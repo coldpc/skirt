@@ -1,20 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {ServiceConfigInterface} from "./ServiceConfigInterface";
 
 // 请求的方式
 const requestMethod = {
   get: 'get',
   post: 'post'
 };
-
-interface RequestConfig {
-  contentType ?: string;
-  url: string;
-  method ?: string;
-  params ?: object;
-  basePath ?: string;
-  data ?: object;
-}
 
 // 默认的basePath
 const defaultProtocol = 'http://';
@@ -34,11 +26,10 @@ const defaultContentType = 'form';
 
 
 @Injectable()
-export class BaseService {
-  constructor(private http: HttpClient) {
-  }
+export class BaseDataService {
+  constructor(private http: HttpClient) {}
 
-  request(config: RequestConfig, success: Function = null, failed: Function = null): void {
+  request(config: ServiceConfigInterface, success: Function = null, failed: Function = null): void {
     if (!config.method) {
       config.method = requestMethod.post;
     }
