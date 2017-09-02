@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ServiceConfigInterface} from "./ServiceConfigInterface";
+import {EnRequestContentTypes} from "../enum/EnRequestContentTypes";
+import qs from 'qs';
 
 // 请求的方式
 const requestMethod = {
@@ -8,25 +10,20 @@ const requestMethod = {
   post: 'post'
 };
 
+// @declare() window = any;
+
 // 默认的basePath
 const defaultProtocol = 'http://';
 const defaultBasePath = '/appapi';
-const defaultRequestHost = location.host;
-
-// 请求的contentType
-const requestContentType = {
-  form: 'application/x-www-form-urlencoded',
-  json: 'application/json',
-  file: 'multipart/form-data'
-};
-
+const defaultRequestHost = "m1.uat.yaok.com" || location.host;
 // 键值
 const contentTypeKey = 'Content-Type';
-const defaultContentType = 'form';
-
 
 @Injectable()
 export class BaseDataService {
+  // 默认的请求类型
+  static defaultContentType = EnRequestContentTypes.form;
+
   constructor(private http: HttpClient) {}
 
   request(config: ServiceConfigInterface, success: Function = null, failed: Function = null): void {
@@ -58,9 +55,9 @@ export class BaseDataService {
 
   controlError(message: string, failed: Function = null) {
     if (typeof failed === 'function') {
-        failed(message);
+      failed(message);
     } else {
-        console.log(message);
+      console.log(message);
     }
   }
 
@@ -80,31 +77,37 @@ export class BaseDataService {
     return url;
   }
 
-  getBody(data: object = {}, contentType: string = defaultContentType): string {
+  getBody(data: object = {}, contentType: string = BaseDataService.defaultContentType): string {
     let p: any, key: string;
-    contentType = requestContentType[contentType];
-    if (contentType === requestContentType.form) {
-      p = '';
-      for (key in data) {
-        if (p.length > 0) {
-          p += '&';
+
+    switch (contentType) {
+      case EnRequestContentTypes.form:
+        p = "";
+        p = qs.stringify(data);
+        break;
+
+      case EnRequestContentTypes.json:
+        p = JSON.stringify(data);
+        break;
+
+      case EnRequestContentTypes.file:
+        p = new FormData();
+        for (key in data) {
+          p.append(key, data[key]);
         }
-        p += key + '=' + data[key];
-      }
-    } else if (contentType === requestContentType.json) {
-      p = JSON.stringify(data);
-    } else if (contentType === requestContentType.file) {
-      p = new FormData();
-      for (key in data) {
-        p.append(key, data[key]);
-      }
+        break;
     }
     return p;
   }
 
-  getHeader(contentType: string = defaultContentType): HttpHeaders {
-    let headers = new HttpHeaders();
-    headers = headers.set(contentTypeKey, requestContentType[contentType]);
-    return headers;
+  getHeader(contentType: string = BaseDataService.defaultContentType): HttpHeaders {
+    //如果为file 不设置
+    if (contentType == EnRequestContentTypes.file) {
+      return null;
+    } else {
+      let headers = new HttpHeaders();
+      headers = headers.set(contentTypeKey, contentType);
+      return headers;
+    }
   }
 }

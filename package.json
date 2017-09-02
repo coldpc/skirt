@@ -1,5 +1,5 @@
 {
-  "name": "na-test-pcd-v2",
+  "name": "skirt",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
@@ -44,6 +44,7 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "ng2-translate": "^5.0.0",
     "protractor": "~5.1.2",
+    "qs": "^6.5.0",
     "ts-node": "~3.2.0",
     "tslint": "~5.3.2",
     "typescript": "~2.4.2"

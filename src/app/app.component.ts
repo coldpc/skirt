@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {TranslateService} from 'ng2-translate';
 import { SkMsgInterface } from './components/sk-msg/SkMsgInterface';
-import { VerifyDynamicPwd } from "./yaok/DataService/login/VerifyDynamicPwd";
-import { Upload } from "./yaok/dataService/attachment/Upload";
+import { VerifyDynamicPwdService } from "./yaok/dataService/login/VerifyDynamicPwdService";
+import { UploadService } from "./yaok/dataService/attachment/UploadService";
 
 interface Hero {
   name: string;
@@ -12,7 +12,7 @@ interface Hero {
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: [],
-  providers: [VerifyDynamicPwd, Upload]
+  providers: [VerifyDynamicPwdService, UploadService]
 })
 
 export class AppComponent {
@@ -28,20 +28,20 @@ export class AppComponent {
     content: 'sadfffffffffffffffff'
   };
 
-  constructor(private translate: TranslateService, private baseService: VerifyDynamicPwd, private uploadService: Upload) {
+  constructor(private translate: TranslateService, private baseService: VerifyDynamicPwdService, private uploadService: UploadService) {
     // 设置默认的语言包
     // this.translate.setDefaultLang('zh_CN');
     // 切换语言包
     this.translate.use('zh_CN');
 
 
-    const service = this.baseService;
-    service.data = {
+    let service = this.baseService;
+    service.setBody({
       dynamicPassword: "asdffffff",
       internationalCode: "+86",
       mobile: "167899",
       token: "132143141"
-    };
+    });
 
     service.execute(res => {
       console.log(res);
@@ -51,22 +51,11 @@ export class AppComponent {
   }
 
   onSubmit(e) {
-    // let files = e.target.files, file, addResult = files;
-    // for (var i = 0, l = files.length; i < l; i++) {
-    //   file = files[i];
-    //   addResult = file; // window.URL.createObjectURL(file));
-    //   if (addResult === false){
-    //     break;
-    //   }
-    // }
-    // input.value = null;
-    debugger;
-
-    this.uploadService.data = {
+    this.uploadService.setBody({
       attachType: "IMG",
       source: "USER",
       file: e.target.files[0]
-    };
+    });
     console.log(e);  // { first: '', last: '' }
     this.uploadService.execute(res => {
       console.log(res);
