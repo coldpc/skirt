@@ -1,9 +1,14 @@
 @import "./app/theme/variables";
+html{
+  font-size: 100px;
+}
 body {
   font-family: 'Helvetica Neue',Helvetica,sans-serif;
   font-size: $rootFontSize !important;
   background-color: $bodyBack;
-  -webkit-overflow-scrolling: touch
+  -webkit-overflow-scrolling: touch;
+  padding: $padding;
+  margin: 0;
 }
 * {
   -webkit-box-sizing: border-box;
@@ -19,7 +24,7 @@ body {
 }
 
 //清楚margin padding
-p, ul, h1, h2, h3, h4, body, html{
+p, ul, h1, h2, h3, h4, html{
   margin: 0;
   padding: 0;
 }

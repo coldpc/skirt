@@ -1,6 +1,7 @@
 import 'hammerjs';
 
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
@@ -15,21 +16,30 @@ import { SkBtnComponent } from './components/sk-btn/sk-btn.component';
 import { SkMsgComponent } from './components/sk-msg/sk-msg.component';
 import { SkMaskComponent } from './components/sk-mask/sk-mask.component';
 import { SkScrollComponent } from './components/sk-scroll/sk-scroll.component';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
+// 状态管理器
+import { StoreModule } from '@ngrx/store';
+import { UserInfoStore } from "./store/User/UserInfoStore";
+import { SkDatePickerComponent } from './components/sk-date-picker/sk-date-picker.component';
+import { SkSelectComponent } from './components/src/app/components/sk-select/sk-select.component';
 @NgModule({
   declarations: [
     AppComponent,
     SkBtnComponent,
     SkMsgComponent,
     SkMaskComponent,
-    SkScrollComponent
+    SkScrollComponent,
+    SkDatePickerComponent,
+    SkSelectComponent
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     HttpModule,
     HttpClientModule,
+    StoreModule.provideStore({UserInfo: UserInfoStore}),
     TranslateModule.forRoot({
       provide: TranslateLoader,
       useFactory: (createTranslateLoader),

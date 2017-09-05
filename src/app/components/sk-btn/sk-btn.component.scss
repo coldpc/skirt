@@ -11,6 +11,7 @@
   outline-color: transparent;
   display: inline-block;
   text-align: center;
+  user-select:none;
 }
 .sk-btn.sk-hvr{
   background-color: $deepBlack;
