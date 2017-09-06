@@ -6,7 +6,9 @@
 <p>{{ counter | async }}</p>
 <p>{{ counter | async }}</p>
 <h1 (tap)="onSwipe($event)" >Hello i18n</h1>
-<app-sk-btn [label]="'HELLO'|translate: {value: 'pccold'}" (tap)="onTap()"></app-sk-btn>
+<app-sk-btn [label]="'HELLO'|translate: {value: 'pccold'}" (tap)="onTap()">
+  <a>111</a>
+</app-sk-btn>
 <!--<input type="file" (change)="onSubmit($event)">-->
 
 <app-sk-mask #mask (hideEvt)="decrement()" [ifShow]="true"></app-sk-mask>

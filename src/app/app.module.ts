@@ -22,7 +22,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { UserInfoStore } from "./store/User/UserInfoStore";
 import { SkDatePickerComponent } from './components/sk-date-picker/sk-date-picker.component';
-import { SkSelectComponent } from './components/src/app/components/sk-select/sk-select.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,8 +29,7 @@ import { SkSelectComponent } from './components/src/app/components/sk-select/sk-
     SkMsgComponent,
     SkMaskComponent,
     SkScrollComponent,
-    SkDatePickerComponent,
-    SkSelectComponent
+    SkDatePickerComponent
   ],
   imports: [
     BrowserAnimationsModule,
