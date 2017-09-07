@@ -1,0 +1,32 @@
+@import "../../../app/theme/variables";
+.sk-scroll-wrapper{
+  background-color: $bodyBack;
+}
+.sk-scroll-wrapper .sk-scroll{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+}
+
+.sk-scroll{
+  background-color: $mainContentBack;
+  overflow-x: hidden;
+  overflow-y: auto;
+  z-index: 2;
+}
+
+.sk-loading-part, .scroll-top-part{
+  text-align: center;
+  padding: 10px;
+  background: $bodyBack;
+}
+
+.scroll-bottom-part{
+  bottom: 0px;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  z-index: 1;
+}
