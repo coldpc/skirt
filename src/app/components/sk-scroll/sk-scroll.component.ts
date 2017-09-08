@@ -120,7 +120,7 @@ export class SkScrollComponent implements OnInit {
 
   // 计算下拉的距离
   countPullDownDistance(dy) {
-    let distance  = 26 * dy * Math.sign(pullDownMaxDistance - this.pullDownDistance ) / pullDownMaxDistance;
+    let distance  = 0.1 + 26 * dy * Math.sign(pullDownMaxDistance - this.pullDownDistance ) / pullDownMaxDistance;
     this.pullDownDistance += distance;
   }
 
