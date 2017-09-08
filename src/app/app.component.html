@@ -1,4 +1,4 @@
-<app-sk-scroll>
+<app-sk-scroll (skPullDownRefresh)="onRefersh($event);" [hasMore]="true" hasRefresh="true" (skLoadMore)="onLoadMore($event)">
   <div class="bottom-slot">
     <p>没有数据 ...</p>
   </div>
@@ -42,9 +42,7 @@
     <p>{{ counter | async }}</p>
     <p>{{ counter | async }}</p>
     <h1 (tap)="onSwipe($event)" >Hello i18n</h1>
-    <app-sk-btn [label]="'HELLO'|translate: {value: 'pccold'}" (tap)="onTap()">
-      <a>111</a>
-    </app-sk-btn>
+    <app-sk-btn [label]="'HELLO'|translate: {value: 'pccold'}" (skTap)="onTap()"></app-sk-btn>
   </div>
 </app-sk-scroll>
 <!--The content below is only a placeholder and can be replaced.-->

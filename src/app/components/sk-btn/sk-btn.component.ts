@@ -10,7 +10,7 @@ export class SkBtnComponent implements OnInit {
   @Input() label: string;
   @Input() width: string;
   @Input() disabled: Boolean;
-  @Output() touch: EventEmitter<Object> = new EventEmitter();
+  @Output() skTap: EventEmitter<Object> = new EventEmitter();
 
   className = '';
 
@@ -28,6 +28,6 @@ export class SkBtnComponent implements OnInit {
   }
 
   onTap(e) {
-    this.touch.emit(e);
+    this.skTap.emit(e);
   }
 }

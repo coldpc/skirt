@@ -109,6 +109,16 @@ export class AppComponent implements AfterViewInit {
     });
   }
 
+  onRefersh(scroll){
+    setTimeout(() => {
+      scroll.endPullDown();
+    }, 3000);
+  }
+
+  onLoadMore(scroll): void{
+    scroll.endLoadingMore(false);
+  }
+
   onSwipe(e: any) {
     console.log(e);
   }
