@@ -125,7 +125,7 @@ export class SkScrollComponent implements OnInit {
   }
 
   // touch结束
-  onTouchEndWrapper() {
+  onTouchEndWrapper(e) {
     let distance = this.pullDownDistance;
     if (distance > 0) {
       if (distance < 0.5 * this.pullDownMaxDistance) {
