@@ -1,12 +1,12 @@
 import {Component} from '@angular/core';
 import {TranslateService} from 'ng2-translate';
 import { NgForm } from '@angular/forms';
-import {BaseDataService} from "../../yaok/dataService/BaseDataService";
+import {BaseDataService} from "../../lib/dataService/BaseDataService";
 
 import { Store } from '@ngrx/store';
 // import { INCREMENT, DECREMENT, RESET } from '../../store/User/UserInfoStore';
 import {Observable} from "rxjs/Observable";
-import {VerifyDynamicPwdService} from "../../yaok/dataService/login/VerifyDynamicPwdService";
+import {VerifyDynamicPwdService} from "../../lib/dataService/login/VerifyDynamicPwdService";
 
 declare var window: any;
 interface AppState {
@@ -19,8 +19,7 @@ interface Hero {
 
 @Component ({
   selector: 'app-root',
-  templateUrl: './Login.html',
-  providers: [BaseDataService]
+  templateUrl: './Login.html'
 })
 
 export class LoginComponent {

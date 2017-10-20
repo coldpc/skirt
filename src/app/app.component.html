@@ -1,7 +1,4 @@
-<app-sk-scroll (skPullDownRefresh)="onRefersh($event);" [hasMore]="true" hasRefresh="true" (skLoadMore)="onLoadMore($event)">
-  <div class="bottom-slot">
-    <p>没有数据 ...</p>
-  </div>
+<app-sk-scroll>
   <div class="main-slot" style="padding: 10px;">
     <p>测试的数据</p>
     <i class="icon-camera" style="font-size: 1rem;"></i>
@@ -52,4 +49,4 @@
 <!--<app-sk-msg [msgInfo]="msgInfo" ></app-sk-msg>-->
 <!--<input type="file" (change)="onSubmit($event)">-->
 
-<app-sk-mask #mask (hideEvt)="decrement()" [ifShow]="true"></app-sk-mask>
+<app-sk-mask #mask [ifShow]="true"></app-sk-mask>

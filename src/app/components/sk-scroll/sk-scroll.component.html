@@ -1,15 +1,5 @@
-<div class="sk-scroll-wrapper" (touchstart)="onTouchStartWrapper($event)" (touchmove)="onTouchMoveWrapper($event)" (touchend)="onTouchEndWrapper($event)" (touchcancel)="onTouchEndWrapper($event)">
-  <div class="scroll-top-part">
-    <app-sk-loading info="没有数据"></app-sk-loading>
-    <ng-content select=".top-slot"></ng-content>
-  </div>
-  <div class="sk-scroll" (scroll)="onScrollContent($event);" [ngStyle]="{marginTop: pullDownDistance + 'px'}" [ngClass]="!!isDownRefreshing ? ('transition down-refreshing') : (pullDownDistance > 0 ? '' : 'transition')">
+<div class="sk-scroll-wrapper">
+  <div class="sk-scroll">
       <ng-content></ng-content>
-      <div class="sk-loading-part" *ngIf="hasMore">
-        <app-sk-loading></app-sk-loading>
-      </div>
-  </div>
-  <div class="scroll-bottom-part">
-    <ng-content select=".bottom-slot"></ng-content>
   </div>
 </div>
