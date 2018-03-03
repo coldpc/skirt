@@ -12,11 +12,17 @@ npm uninstall -g angular-cli
 npm cache clean
 
 //设置angular ng的安装代理cnpm
+<<<<<<< HEAD
 npm config set registry http://registry.npm.taobao.org/
 2.换成原来的
 
 npm config set registry https://registry.npmjs.org/
 4、ng set --global packageManager=cnpm
+=======
+4、
+ng set --global packageManager=cnpm
+npm config set registry https://registry.npm.taobao.org
+>>>>>>> 528c4ab58fa6b4356f3a141b417861320203729f
 
 //进入目录
 5、ng new project-name
@@ -34,7 +40,7 @@ npm config set registry https://registry.npmjs.org/
 ng build --prod --aot
 
 /**********ng server***********/
-ng server --host 192.168.0.249 --port 4200 --open
+ng server --host 192.168.0.100 --port 4200 --open
 
 
 /***************安装gzip******************/

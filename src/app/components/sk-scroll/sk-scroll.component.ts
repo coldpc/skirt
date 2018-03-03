@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {Component, OnInit, Input, Output, EventEmitter, AfterViewInit, ViewChild, ElementRef} from '@angular/core';
 import {Timer} from "./Timer";
 import {TimerManager} from "./TimerManager";
@@ -34,14 +35,20 @@ export interface ScrollData {
 
 const pullDownMaxDistance = 100;
 const bottomLoadDistance = 60;
+=======
+import {Component, OnInit, Input, Output, EventEmitter, AfterViewInit} from '@angular/core';
+
+declare const IScroll: any;
+>>>>>>> 528c4ab58fa6b4356f3a141b417861320203729f
 
 declare let window: any;
 
 @Component({
-  selector: 'app-sk-scroll',
-  templateUrl: './sk-scroll.component.html',
-  styleUrls: ['./sk-scroll.component.scss']
+    selector: 'app-sk-scroll',
+    templateUrl: './sk-scroll.component.html',
+    styleUrls: ['./sk-scroll.component.scss']
 })
+<<<<<<< HEAD
 
 export class SkScrollComponent implements OnInit, AfterViewInit {
   @Input() direct: string; // x, y 默认y
@@ -123,12 +130,18 @@ export class SkScrollComponent implements OnInit, AfterViewInit {
 
     this.endMove();
   }
+=======
+export class SkScrollComponent implements OnInit, AfterViewInit {
+    @Output() skPullDownRefresh: EventEmitter<SkScrollComponent> = new EventEmitter();
+    @Output() skLoadMore: EventEmitter<SkScrollComponent> = new EventEmitter();
 
-  stopPropagation(e) {
-    e.stopPropagation();
-    if (e.cancelable && !e.defaultPrevented) {
-      e.preventDefault();
+    constructor() {
     }
+>>>>>>> 528c4ab58fa6b4356f3a141b417861320203729f
+
+    ngOnInit() {
+    }
+<<<<<<< HEAD
   }
 
   setStartMove(touch) {
@@ -207,4 +220,10 @@ export class SkScrollComponent implements OnInit, AfterViewInit {
   resetTouchData() {
     this.touchData.dy = 0;
   }
+=======
+
+    ngAfterViewInit() {
+        debugger;
+    }
+>>>>>>> 528c4ab58fa6b4356f3a141b417861320203729f
 }

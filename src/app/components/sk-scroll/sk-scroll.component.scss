@@ -1,4 +1,5 @@
 @import "../../../app/theme/variables";
+<<<<<<< HEAD
 .sk-scroll-wrapper{
   background-color: $bodyBack;
 }
@@ -19,23 +20,19 @@
   transition-duration: 0ms;
   transition-timing-function: linear;
   transform: translate(0px, -10px);
+=======
+
+.sk-scroll-wrapper {
+    background-color: $bodyBack;
+>>>>>>> 528c4ab58fa6b4356f3a141b417861320203729f
 }
 
-.sk-loading-part, .scroll-top-part{
-  text-align: center;
-  padding: 10px;
-  background: $bodyBack;
-}
-
-.scroll-bottom-part{
-  bottom: 0px;
-  left: 0px;
-  position: absolute;
-  text-align: center;
-  width: 100%;
-}
-.down-refreshing{
-  transition-duration: 0.1s;
+.sk-scroll-wrapper .sk-scroll {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
 }
 .log{
   position: fixed;
