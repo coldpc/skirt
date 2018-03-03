@@ -1,4 +1,4 @@
-export enum EnRequestMethods{
-  get = 'get',
-  post = 'post'
+export class EnRequestMethods{
+  static get = 'get';
+  static post = 'post';
 }

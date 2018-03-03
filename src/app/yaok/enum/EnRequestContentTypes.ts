@@ -1,5 +1,5 @@
-export enum EnRequestContentTypes {
-  form = 'application/x-www-form-urlencoded',
-  json = 'application/json',
-  file = 'multipart/form-data'
+export class EnRequestContentTypes {
+  static form = 'application/x-www-form-urlencoded';
+  static json = 'application/json';
+  static file = 'multipart/form-data';
 }

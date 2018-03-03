@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('na-test-pcd-v2 App', () => {
+describe('skirt-now App', () => {
   let page: AppPage;
 
   beforeEach(() => {

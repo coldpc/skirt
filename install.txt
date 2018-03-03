@@ -12,6 +12,10 @@ npm uninstall -g angular-cli
 npm cache clean
 
 //设置angular ng的安装代理cnpm
+npm config set registry http://registry.npm.taobao.org/
+2.换成原来的
+
+npm config set registry https://registry.npmjs.org/
 4、ng set --global packageManager=cnpm
 
 //进入目录
@@ -24,6 +28,8 @@ npm cache clean
 //安装手势识别 寻求帮助访问：https://scotch.io/tutorials/using-hammerjs-touch-gesture-in-angular-2
 7、npm install hammerjs --save-dev
 
+8、npm install @ngrx/core @ngrx/store@2.2.3 --save
+
 /*********发布代码**************/
 ng build --prod --aot
 
@@ -33,9 +39,9 @@ ng server --host 192.168.0.249 --port 4200 --open
 
 /***************安装gzip******************/
 npm i compression@1.6.1 --save
-cnpm install --save-dev gulp-uglify
-cnpm install --save-dev gulp-gzip
-cnpm install --save-dev gulp
+npm install --save-dev gulp-uglify
+npm install --save-dev gulp-gzip
+npm install --save-dev gulp
 
 
 /*************快速命令ng*************/

@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter, AfterViewInit, ViewChild, ElementRef} from '@angular/core';
+import {Timer} from "./Timer";
+import {TimerManager} from "./TimerManager";
 
-declare var window: any;
 
 export interface TouchData {
   x0: number;
@@ -9,11 +10,19 @@ export interface TouchData {
   yt: number;
   dy: number;
   dx: number;
+  y: number;
+  lastTime: number;
+  time?: number;
+  speed: number;
+  lastSpeed: number;
+  direct: number;
 }
 
 export interface ScrollData {
   target?: HTMLDivElement;
   event?: any;
+  direct: number;
+  targetY ?: number;
   scrollY?: number;
   scrollX?: number;
   scrollHeight?: number;
@@ -26,12 +35,15 @@ export interface ScrollData {
 const pullDownMaxDistance = 100;
 const bottomLoadDistance = 60;
 
+declare let window: any;
+
 @Component({
   selector: 'app-sk-scroll',
   templateUrl: './sk-scroll.component.html',
   styleUrls: ['./sk-scroll.component.scss']
 })
-export class SkScrollComponent implements OnInit {
+
+export class SkScrollComponent implements OnInit, AfterViewInit {
   @Input() direct: string; // x, y 默认y
   @Input() pullDownMaxDistance = pullDownMaxDistance;
   @Input() hasMore: boolean; // 用加载更多的数据
@@ -40,14 +52,8 @@ export class SkScrollComponent implements OnInit {
   @Output() skPullDownRefresh: EventEmitter<SkScrollComponent> = new EventEmitter();
   @Output() skLoadMore: EventEmitter<SkScrollComponent> = new EventEmitter();
 
-  scrollData: ScrollData = {
-    scrollY: 0,
-    bottomDistance: NaN
-  }; // 滚动跳的数据
-  isLoadingMore = false;
-
-  pullDownDistance = 0; //下拉距离
-  isDownRefreshing = false;
+  @ViewChild('scroll') scroll: ElementRef;
+  @ViewChild('scrollWrapper') scrollWrapper: ElementRef;
 
   touchData: TouchData = {
     x0: 0,
@@ -55,29 +61,67 @@ export class SkScrollComponent implements OnInit {
     xt: 0,
     yt: 0,
     dy: 0,
-    dx: 0
+    dx: 0,
+    y: 0,
+    lastTime: 0,
+    speed: 0,
+    lastSpeed: 0,
+    direct:0 // 0 -1 1
   };
+
+  timer: Timer = new Timer(30, 30);
+
+  private _isRunning: boolean = false;
+  private _isEnd = true;
+  private _durationNum = 4; // 4次结束
+  private _frameTime = TimerManager.getDelay();
+  private _minDistance = 10;
+
+
   constructor() {
+    window.test = this;
+
+    this.timer.stepEvent.subscribe(timer => {
+      console.log(timer.getTime());
+    });
+    this.timer.run();
   }
 
   ngOnInit() {
   }
 
-  onScrollContent(e) {
-    const target = e.target;
-    const scrollData = this.scrollData;
-    scrollData.target  =target;
-    scrollData.height = target.offsetHeight;
-    scrollData.scrollHeight = target.scrollHeight;
-    scrollData.scrollY = target.scrollTop;
-    scrollData.event = e;
-    scrollData.bottomDistance = scrollData.scrollHeight - scrollData.scrollY - scrollData.height;
+  ngAfterViewInit() {
+    console.log(this.scroll.nativeElement);
+  }
 
-    if(this.hasMore
-      && !this.isLoadingMore && !isNaN(scrollData.bottomDistance) && scrollData.bottomDistance < bottomLoadDistance) {
-      this.skLoadMore.emit(this);
-      this.isLoadingMore = true;
-    }
+  // 设置y的坐标
+  setTransformY(y) {
+    this.scroll.nativeElement.style.transform = `translateY(${y}px)`;
+  }
+
+  setDuration(time) {
+    this.scroll.nativeElement.style.transitionDuration = `${time}ms`;
+  }
+
+  endMove() {
+    this._isEnd = true;
+  }
+
+  // 停止滚动
+  stopMove() {
+    this.touchData.direct = 0;
+    this.touchData.y0 = this.touchData.yt = 0;
+    this._isEnd = true;
+    this.timer.stop();
+    this.setTransformY(this.getCurrentY());
+  }
+
+  move(yt) {
+    this._isEnd = false;
+    this.setDuration('0ms');
+    this.setTransformY(yt);
+
+    this.endMove();
   }
 
   stopPropagation(e) {
@@ -87,72 +131,80 @@ export class SkScrollComponent implements OnInit {
     }
   }
 
+  setStartMove(touch) {
+    this.stopMove();
+    let touchData = this.touchData;
+    touchData.direct = 0;
+    touchData.y0 = touch.clientY;
+    touchData.lastTime = new Date().getTime();
+  }
+
   /**
    *
-   * @param e
-   * 下拉的时候导致刷新
+   *  开始触摸的时候停止滚动
+   *  暂时不考虑下拉刷新
    *
    */
   onTouchStartWrapper(e) {
-    const touch = e.touches[0];
-    const touchData = this.touchData;
-    touchData.y0 = touch.clientY;
-
-    if (this.isDownRefreshing) {
-      this.stopPropagation(e);
-    }
+    this.stopPropagation(e);
+    this.setStartMove(e.touches[0]);
   }
 
+
+  /**
+   *
+   * 滑动的时候
+   *
+   */
   onTouchMoveWrapper(e) {
+    // if (!this._isEnd) {
+    //   return;
+    // }
     let touch = e.touches[0];
     let touchData = this.touchData;
-    let scrollData = this.scrollData;
+    let dy, direct;
 
-    touchData.yt = touch.clientY;
-    touchData.dy = touchData.yt - touchData.y0;
+    let yt = touch.clientY;
+    let time = new Date().getTime();
+
+    dy = yt - touchData.y0;
+
+    // 未改变y 更新时间
+    let dTime = time - touchData.lastTime;
+    let speed = 1000 * dy / dTime;  //1000 / 1000
+
     touchData.y0 = touchData.yt;
+    touchData.yt = yt;
+    touchData.y += parseInt(dy);
 
-    if (touchData.dy > 0 &&scrollData.scrollY < 3) {
-      this.stopPropagation(e);
-      this.countPullDownDistance(touchData.dy);
+    if (!touchData.y0){
+      touchData.y0 = yt;
+      return;
     }
+    console.log(touchData.yt, dy, touchData.y0);
+    this.move(touchData.y);
+
+    this._isEnd = false;
   }
 
-  // 计算下拉的距离
-  countPullDownDistance(dy) {
-    let distance  = 0.1 + 26 * dy * Math.sign(pullDownMaxDistance - this.pullDownDistance ) / pullDownMaxDistance;
-    this.pullDownDistance += distance;
+ // 获取当前的y坐标
+  getCurrentY() {
+    let transform = getComputedStyle(this.scroll.nativeElement).transform.replace(")", "").split(',');
+    return parseInt(transform[transform.length - 1]);
+  }
+
+  // 获取最大的滚动距离
+  getMaxScroll() {
+    let dy = this.scroll.nativeElement.offsetHeight - this.scrollWrapper.nativeElement.offsetHeight;
+    return (dy > 0 ? dy : 0) + 160;
   }
 
   // touch结束
   onTouchEndWrapper() {
-    let distance = this.pullDownDistance;
-    if (distance > 0) {
-      if (distance < 0.5 * this.pullDownMaxDistance) {
-        this.pullDownDistance = 0;
-      } else {
-        this.isDownRefreshing = true;
-        this.pullDownDistance = this.pullDownMaxDistance;
-        this.skPullDownRefresh.emit(this);
-      }
-    }
-
-    this.resetTouchData();
+    this.stopMove();
   }
 
   resetTouchData() {
     this.touchData.dy = 0;
-  }
-
-  // 结束刷新
-  endPullDown(): void {
-    this.isDownRefreshing = false;
-    this.pullDownDistance = 0;
-  }
-
-  endLoadingMore(hasMore) {
-    console.log("end-has-more", hasMore);
-    this.hasMore = hasMore;
-    this.isLoadingMore = false;
   }
 }

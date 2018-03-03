@@ -2,19 +2,23 @@
 .sk-scroll-wrapper{
   background-color: $bodyBack;
 }
-.sk-scroll-wrapper .sk-scroll{
+.sk-scroll-wrapper{
   position: absolute;
   top: 0px;
   left: 0px;
   right: 0px;
   bottom: 0px;
+  overflow: hidden;
 }
 
 .sk-scroll{
   background-color: $mainContentBack;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
   z-index: 2;
+  transition-property: transform;
+  transition-duration: 0ms;
+  transition-timing-function: linear;
+  transform: translate(0px, -10px);
 }
 
 .sk-loading-part, .scroll-top-part{
@@ -32,4 +36,16 @@
 }
 .down-refreshing{
   transition-duration: 0.1s;
+}
+.log{
+  position: fixed;
+  z-index: 100000;
+  background: #444;
+  color: #0FE4B3;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  line-height: 20px;
+  padding: 20px 10px;
+  opacity: 0.9;
 }

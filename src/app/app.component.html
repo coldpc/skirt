@@ -3,9 +3,7 @@
     <p>没有数据 ...</p>
   </div>
   <div class="main-slot" style="padding: 10px;">
-    <p>测试的数据</p>
-    <i class="icon-camera" style="font-size: 1rem;"></i>
-    <h5>下拉刷新</h5>
+    <p>appTouch.prototype = move : function(e) var monitor = document.getElementById(this.touchContain), //监听容器target = document.getElementById(this.touchMove), //移动目标scroller = document.getElementById(this.touchScroller), //自定义滚动条scrollerArea = document.getElementById(this.touchScrollerArea), //滚动条区域sheight = monitor.offsetHeight / target.offsetHeight * monitor.offsetHeight, //自定义滚动条的长度st = (target.offsetHeight - monitor.offsetHeight) / (monitor.offsetHeight - sheight), //移动块对应滚轮单位长度tslow = 4, //到顶/底减基数tMove = 0, //滑块到顶top值tMoveL = tMove + 140, //到顶允许下拉范围bMove = monitor.offsetHeight - target.offsetHeight, //滑块到底top值bMoveL = bMove - 140, //到底允许上滑范围callbackfn = this.callbackfn, //回调函数flg = false, //标记是否滑动</p>
     <h1>This is temp</h1>
     <h1>This is temp</h1>
     <h1>This is temp</h1>
@@ -46,10 +44,6 @@
   </div>
 </app-sk-scroll>
 <!--The content below is only a placeholder and can be replaced.-->
+
+<app-sk-mask #mask (hideEvt)="set()" [ifShow]="false"></app-sk-mask>
 <router-outlet></router-outlet>
-
-<!--<app-sk-btn [disabled]="true" label="我的扥"></app-sk-btn>-->
-<!--<app-sk-msg [msgInfo]="msgInfo" ></app-sk-msg>-->
-<!--<input type="file" (change)="onSubmit($event)">-->
-
-<app-sk-mask #mask (hideEvt)="decrement()" [ifShow]="true"></app-sk-mask>

@@ -23,6 +23,8 @@ import { StoreModule } from '@ngrx/store';
 import { UserInfoStore } from "./store/User/UserInfoStore";
 import { SkDatePickerComponent } from './components/sk-date-picker/sk-date-picker.component';
 import { SkLoadingComponent } from './components/sk-loading/sk-loading.component';
+import {SkSelectComponent} from "./components/sk-select/sk-select.component";
+import {Reducers} from "./store/Reducers";
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +33,8 @@ import { SkLoadingComponent } from './components/sk-loading/sk-loading.component
     SkMaskComponent,
     SkScrollComponent,
     SkDatePickerComponent,
-    SkLoadingComponent
+    SkLoadingComponent,
+    SkSelectComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -40,6 +43,7 @@ import { SkLoadingComponent } from './components/sk-loading/sk-loading.component
     HttpModule,
     HttpClientModule,
     StoreModule.provideStore({UserInfo: UserInfoStore}),
+    StoreModule.provideStore({state: Reducers}),
     TranslateModule.forRoot({
       provide: TranslateLoader,
       useFactory: (createTranslateLoader),

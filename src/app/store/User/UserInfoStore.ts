@@ -1,4 +1,4 @@
-import { Action } from '@ngrx/store'; // ng build --prod --aot
+import { Action,  } from '@ngrx/store'; // ng build --prod --aot
 
 export const INCREMENT = 'INCREMENT';
 export const DECREMENT = 'DECREMENT';

@@ -1,9 +1,9 @@
-export enum EnUploadType {
-  User = "USER",
-  Order = "ORDER",
-  Item = "ITEM",
-  Brand = "BRAND",
-  RichText = "RICH_TEXT",
-  Outside = "OUTSIDE",
-  Message = "MESSAGE"
+export class EnUploadType {
+  static User = "USER";
+  static Order = "ORDER";
+  static Item = "ITEM";
+  static Brand = "BRAND";
+  static RichText = "RICH_TEXT";
+  static Outside = "OUTSIDE";
+  static Message = "MESSAGE";
 }

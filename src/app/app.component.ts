@@ -8,6 +8,7 @@ import { Store } from '@ngrx/store';
 import { INCREMENT, DECREMENT, RESET } from './store/User/UserInfoStore';
 import {Observable} from "rxjs/Observable";
 import {SkMaskComponent} from "./components/sk-mask/sk-mask.component";
+import {InUserInfo} from "./store/User/UserModule";
 
 interface AppState {
   counter: number;
@@ -39,6 +40,8 @@ export class AppComponent implements AfterViewInit {
 
   counter: Observable<number>;
 
+  userInfo: Observable<InUserInfo>;
+
   msgInfo: SkMsgInterface = {
     title: 'test',
     content: 'sadfffffffffffffffff'
@@ -46,30 +49,31 @@ export class AppComponent implements AfterViewInit {
 
   constructor(private store: Store<AppState>, private translate: TranslateService, private baseService: VerifyDynamicPwdService, private uploadService: UploadService) {
 
-    window.translate1 = translate;
-    window.store1 = store;
-    window.VerifyDynamicPwdService1 = baseService;
-    this.counter = store.select('UserInfo');
-
-    // 设置默认的语言包
-    // this.translate.setDefaultLang('zh_CN');
-    // 切换语言包
-    this.translate.use('zh_CN');
-
-
-    const service = this.baseService;
-    service.setBody({
-      dynamicPassword: "asdffffff",
-      internationalCode: "+86",
-      mobile: "167899",
-      token: "132143141"
-    });
-
-    service.execute(res => {
-      console.log(res);
-    }, msg => {
-      console.log(this.baseService, msg);
-    });
+    // window.translate1 = translate;
+    // window.store1 = store;
+    // window.VerifyDynamicPwdService1 = baseService;
+    // this.counter = store.select('UserInfo');
+    // this.userInfo = store.select('state');
+    //
+    // // 设置默认的语言包
+    // // this.translate.setDefaultLang('zh_CN');
+    // // 切换语言包
+    // this.translate.use('zh_CN');
+    //
+    //
+    // const service = this.baseService;
+    // service.setBody({
+    //   dynamicPassword: "asdffffff",
+    //   internationalCode: "+86",
+    //   mobile: "167899",
+    //   token: "132143141"
+    // });
+    //
+    // service.execute(res => {
+    //   console.log(res);
+    // }, msg => {
+    //   console.log(this.baseService, msg);
+    // });
   }
 
   ngAfterViewInit(){
@@ -84,11 +88,16 @@ export class AppComponent implements AfterViewInit {
   }
 
   decrement() {
-    this.store.dispatch({ type: DECREMENT });
+    this.store.dispatch({ type: DECREMENT, payload: 2 });
   }
 
   reset() {
     this.store.dispatch({ type: RESET });
+  }
+
+  set(){
+    debugger;
+    this.store.dispatch({type: 'user.set', payload: {name: 'pccold'}})
   }
 
   onTap() {
